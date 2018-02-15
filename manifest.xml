@@ -1,0 +1,10 @@
+<package>
+  <description brief="deployments specific to simulating the HEADS system">
+  
+  </description>
+  <author>Sylvain Joyeux/sylvain.joyeux@13robotics.com.br</author>
+  <license>Proprietary</license>
+  <depend package="base/cmake" />
+  <depend package="tools/orogen-slave_scheduler" />
+  <depend package="simulation/orogen/heads_simulation" />
+</package>

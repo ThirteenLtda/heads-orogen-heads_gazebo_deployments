@@ -1,0 +1,17 @@
+name "heads_gazebo_deployments"
+
+using_task_library 'slave_scheduler'
+using_task_library 'heads_simulation'
+
+import_types_from "std"
+
+deployment 'heads_ship_simulation' do
+    ref = task('ship_ref', 'heads_simulation::VehicleMotionReferenceTask')
+	body_to_inertial = task('ship_body_to_inertial', 'heads_simulation::RigidBodyToInertialTask')
+    control = task('ship_control', 'heads_simulation::RigidBodyControlTask')
+    
+    scheduler = task('scheduler', "slave_scheduler::OrderedSchedulingTask")
+    ref.slave_of(scheduler)
+    body_to_inertial.slave_of(scheduler)
+    control.slave_of(scheduler)
+end
