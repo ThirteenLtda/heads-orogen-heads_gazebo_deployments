@@ -2,16 +2,33 @@ name "heads_gazebo_deployments"
 
 using_task_library 'slave_scheduler'
 using_task_library 'heads_simulation'
+using_task_library 'heads_control'
 
 import_types_from "std"
 
 deployment 'heads_ship_simulation' do
-    ref = task('ship_ref', 'heads_simulation::VehicleMotionReferenceTask')
-	body_to_inertial = task('ship_body_to_inertial', 'heads_simulation::RigidBodyToInertialTask')
-    control = task('ship_control', 'heads_simulation::RigidBodyControlTask')
-    
-    scheduler = task('scheduler', "slave_scheduler::OrderedSchedulingTask")
-    ref.slave_of(scheduler)
-    body_to_inertial.slave_of(scheduler)
-    control.slave_of(scheduler)
+    tasks = [
+        task('vehicle_ref', 'heads_simulation::VehicleMotionReferenceTask'),
+        task('vehicle_rb_to_inertial', 'heads_simulation::RigidBodyToInertialTask'),
+        task('vehicle_control', 'heads_simulation::RigidBodyControlTask')
+    ]
+
+    scheduler = task('heads_ship_scheduler', "slave_scheduler::OrderedSchedulingTask")
+    tasks.each { |t| t.slave_of(scheduler) }
+end
+
+deployment 'heads_control' do
+    tasks = [
+        task('imu', 'heads_simulation::IMUTask'),
+        task('encoder', 'heads_simulation::EncoderTask'),
+        task('joint_acc', 'heads_control::JointAccelerationEstimatorTask'),
+        task('camera_body_to_inertial', 'heads_control::BodyToInertialTask'),
+        task('base_body_to_inertial', 'heads_control::BodyToInertialTask'),
+        task('ne', 'heads_control::NETask'),
+        task('camera_ref', 'heads_control::CameraReferenceTask'),
+        task('ctpid', 'heads_control::OperationalSpaceCTPIDTask')
+    ]
+
+    scheduler = task('heads_control_scheduler', "slave_scheduler::OrderedSchedulingTask")
+    tasks.each { |t| t.slave_of(scheduler) }
 end
