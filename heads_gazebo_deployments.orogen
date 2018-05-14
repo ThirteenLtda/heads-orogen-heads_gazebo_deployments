@@ -13,7 +13,8 @@ deployment 'heads_ship_simulation' do
         task('vehicle_control', 'heads_simulation::RigidBodyControlTask')
     ]
 
-    scheduler = task('heads_ship_scheduler', "slave_scheduler::OrderedSchedulingTask")
+    scheduler = task('heads_ship_scheduler', "slave_scheduler::OrderedSchedulingTask").
+    	periodic(0.001)
     tasks.each { |t| t.slave_of(scheduler) }
 
     add_default_logger
@@ -31,7 +32,8 @@ deployment 'heads_control' do
         task('ctpid', 'heads_control::OperationalSpaceCTPIDTask')
     ]
 
-    scheduler = task('heads_control_scheduler', "slave_scheduler::OrderedSchedulingTask")
+    scheduler = task('heads_control_scheduler', "slave_scheduler::OrderedSchedulingTask").
+    	periodic(0.001)
     tasks.each { |t| t.slave_of(scheduler) }
 
     add_default_logger
