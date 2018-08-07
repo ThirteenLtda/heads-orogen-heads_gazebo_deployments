@@ -24,7 +24,7 @@ deployment 'heads_control' do
     tasks = [
         task('imu', 'heads_simulation::IMUTask'),
         task('encoder', 'heads_simulation::EncoderTask'),
-        task('joint_acc', 'heads_control::JointAccelerationEstimatorTask'),
+        task('joint_obs', 'heads_control::JointMotionObserverTask'),
         task('camera_body_to_inertial', 'heads_control::BodyToInertialTask'),
         task('base_body_to_inertial', 'heads_control::BodyToInertialTask'),
         task('ne', 'heads_control::NETask'),
