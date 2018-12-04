@@ -28,6 +28,7 @@ deployment 'heads_control' do
         task('camera_body_to_inertial', 'heads_control::BodyToInertialTask'),
         task('base_body_to_inertial', 'heads_control::BodyToInertialTask'),
         task('ne', 'heads_control::NETask'),
+        task('traj_plan', 'heads_control::TrajectoryPlannerTask'),
         task('camera_ref', 'heads_control::CameraReferenceTask'),
         task('ctpid', 'heads_control::OperationalSpaceCTPIDTask')
     ]
