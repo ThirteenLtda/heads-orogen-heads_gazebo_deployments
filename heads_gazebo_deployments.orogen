@@ -29,8 +29,12 @@ deployment 'heads_control' do
         task('base_body_to_inertial', 'heads_control::BodyToInertialTask'),
         task('ne', 'heads_control::NETask'),
         task('traj_plan', 'heads_control::TrajectoryPlannerTask'),
+        task('traj_plan_orientation', 'heads_control::TrajectoryPlannerOrientationTask'),
         task('camera_ref', 'heads_control::CameraReferenceTask'),
-        task('ctpid', 'heads_control::OperationalSpaceCTPIDTask')
+        task('ctpid', 'heads_control::OperationalSpaceCTPIDTask'),
+        task('ppi', 'heads_control::JointSpacePPITask'),
+        task('operational_to_joint_space', 'heads_control::OperationalToJointSpaceTask'),
+        task('friction_compensation', 'heads_control::FrictionCompensationTask')
     ]
 
     scheduler = task('heads_control_scheduler', "slave_scheduler::OrderedSchedulingTask").
