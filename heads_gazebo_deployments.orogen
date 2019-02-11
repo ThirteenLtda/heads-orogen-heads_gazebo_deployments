@@ -32,6 +32,7 @@ deployment 'heads_control' do
         task('traj_plan_orientation', 'heads_control::TrajectoryPlannerOrientationTask'),
         task('camera_ref', 'heads_control::CameraReferenceTask'),
         task('ctpid', 'heads_control::OperationalSpaceCTPIDTask'),
+        task('joint_ctpid', 'heads_control::JointSpaceCTPIDTask'),
         task('ppi', 'heads_control::JointSpacePPITask'),
         task('operational_to_joint_space', 'heads_control::OperationalToJointSpaceTask'),
         task('friction_compensation', 'heads_control::FrictionCompensationTask')
