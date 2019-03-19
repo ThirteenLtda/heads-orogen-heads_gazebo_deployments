@@ -41,6 +41,7 @@ deployment 'heads_control' do
         task('operational_to_joint_space', 'heads_control::OperationalToJointSpaceTask'),
         task('joint_ref', 'heads_control::JointMotionReferenceTask'),
         task('friction_identification', 'heads_control::FrictionIdentificationTask'),
+        task('joint_friction_identification_cte_vel', 'heads_control::JointFrictionIdentificationCteVelTask'),
         task('joints_to_time', 'heads_control::JointsToTimeTask'),
         task('yaw_joint_pid', 'heads_control::JointPIDTask'),
         task('pitch_joint_pid', 'heads_control::JointPIDTask'),
